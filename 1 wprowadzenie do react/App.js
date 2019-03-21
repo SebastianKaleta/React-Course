@@ -16,4 +16,29 @@
 console.log(React);
 console.log(ReactDOM);
 
-const element = <div> Pierwszy element React </div>;
+const element = (
+  <section>
+    {" "}
+    <div id="app" key="object1">
+      {" "}
+      Pierwszy element React{" "}
+    </div>
+  </section>
+);
+
+const element2 = React.createElement("div", null, "pierwszy element react");
+
+const element3 = (
+  <div>
+    <p id="main" className="Red">
+      tekst
+    </p>
+  </div>
+);
+
+const element5 = (
+  <React.Fragment>
+    <section />
+    <section />
+  </React.Fragment>
+);
