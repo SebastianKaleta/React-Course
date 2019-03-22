@@ -52,6 +52,7 @@ class App extends React.Component {
     this.state = {
       text: ""
     };
+    this.handleClick = this.handleClick.bind(this);
   }
   // state = {
   //   text: ""
@@ -68,7 +69,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <button onClick={this.handleClick.bind(this)}>Dodaj "A"</button>
+        <button onClick={this.handleClick}>Dodaj "A"</button>
         <h1>{this.state.text}</h1>
       </>
     );
