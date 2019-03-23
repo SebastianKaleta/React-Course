@@ -59,21 +59,29 @@ class App extends React.Component {
   // };
 
   handleClick() {
-    const letter = "a";
+    const number = Math.floor(Math.random() * 10);
 
     this.setState(() => ({
-      text: this.state.text + letter
+      text: this.state.text + number
     }));
   }
 
   render() {
+    const btnName = "stwórz liczbę";
     return (
       <>
-        <button onClick={this.handleClick}>Dodaj "A"</button>
-        <h1>{this.state.text}</h1>
+        <button onClick={this.handleClick}>{btnName}</button>
+        <PanelResult text={this.state.text} />
       </>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const PanelResult = props => {
+  return <h1>{props.text}</h1>;
+};
+
+ReactDOM.render(
+  <App btnTitle="Dodaj cyfrę" />,
+  document.getElementById("root")
+);
