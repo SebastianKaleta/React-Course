@@ -8,7 +8,6 @@ class Message extends React.Component {
   }
 
   handleMessageButton() {
-    debugger;
     this.setState({
       messageIsActive: !this.state.messageIsActive
     });
