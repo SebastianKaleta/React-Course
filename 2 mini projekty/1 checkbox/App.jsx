@@ -14,6 +14,14 @@ class CheckboxAgeConfirmation extends React.Component {
     });
   };
 
+  displayMessage = () => {
+    if (this.state.isConfirmed) {
+      return <PositivMessage />;
+    } else {
+      return <NegativMessage />;
+    }
+  };
+
   render() {
     return (
       <>
@@ -25,6 +33,7 @@ class CheckboxAgeConfirmation extends React.Component {
           checked={this.state.isConfirmed}
         />
         <label htmlFor="age">Mam co najmniej 16lat</label>
+        {this.displayMessage()}
       </>
     );
   }
