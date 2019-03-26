@@ -1,7 +1,23 @@
-const PositivMessage = () => <p>Możesz obejrzeć film. Zapraszamy!</p>;
-const NegativMessage = () => (
-  <p>Nie możesz obejrzeć tego filmu jeśli masz mniej niż 16 lat!</p>
-);
+// const PositivMessage = () => <p>Możesz obejrzeć film. Zapraszamy!</p>;
+// const NegativMessage = () => (
+//   <p>Nie możesz obejrzeć tego filmu jeśli masz mniej niż 16 lat!</p>
+// );
+
+const displayMessage = (isConfirmed, isFormSubmitted) => {
+  if (isFormSubmitted) {
+    if (isConfirmed) {
+      return <ValidationMessage txt="Możesz obejrzeć film. Zapraszamy!" />;
+    } else {
+      return (
+        <ValidationMessage txt="Nie możesz obejrzeć tego filmu jeśli masz mniej niż 16 lat!" />
+      );
+    }
+  } else {
+    return null;
+  }
+};
+
+const ValidationMessage = props => <p>{props.txt}</p>;
 
 class TicketShop extends React.Component {
   state = {
@@ -16,17 +32,21 @@ class TicketShop extends React.Component {
     });
   };
 
-  displayMessage = () => {
-    if (this.state.isFormSubmitted) {
-      if (this.state.isConfirmed) {
-        return <PositivMessage />;
-      } else {
-        return <NegativMessage />;
-      }
-    } else {
-      return null;
-    }
-  };
+  // displayMessage = () => {
+  //   if (this.state.isFormSubmitted) {
+  //     if (this.state.isConfirmed) {
+  //       return (
+  //         <ValidationMessage txt="Możesz obejrzeć film. Zapraszamy!" />
+  //       );
+  //     } else {
+  //       return (
+  //         <ValidationMessage txt="Nie możesz obejrzeć tego filmu jeśli masz mniej niż 16 lat!" />
+  //       );
+  //     }
+  //   } else {
+  //     return null;
+  //   }
+  // };
 
   handleFormSubmit = e => {
     e.preventDefault();
@@ -37,6 +57,8 @@ class TicketShop extends React.Component {
   };
 
   render() {
+    const { isConfirmed, isFormSubmitted } = this.state; //destrukturyzacja
+
     return (
       <>
         <h1>Kup bilet na horror roku!</h1>
@@ -45,13 +67,13 @@ class TicketShop extends React.Component {
             type="checkbox"
             id="age"
             onChange={this.handleCheckboxCheck}
-            checked={this.state.isConfirmed}
+            checked={isConfirmed}
           />
           <label htmlFor="age">Mam co najmniej 16lat</label>
           <br />
           <button>Kup bilet</button>
         </form>
-        {this.displayMessage()}
+        {displayMessage(isConfirmed, isFormSubmitted)}
       </>
     );
   }
