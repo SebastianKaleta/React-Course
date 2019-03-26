@@ -3,40 +3,58 @@ const NegativMessage = () => (
   <p>Nie możesz obejrzeć tego filmu jeśli masz mniej niż 16 lat!</p>
 );
 
-class CheckboxAgeConfirmation extends React.Component {
+class TicketShop extends React.Component {
   state = {
-    isConfirmed: false
+    isConfirmed: false,
+    isFormSubmitted: false
   };
 
   handleCheckboxCheck = () => {
     this.setState({
-      isConfirmed: !this.state.isConfirmed
+      isConfirmed: !this.state.isConfirmed,
+      isFormSubmitted: false
     });
   };
 
   displayMessage = () => {
-    if (this.state.isConfirmed) {
-      return <PositivMessage />;
+    if (this.state.isFormSubmitted) {
+      if (this.state.isConfirmed) {
+        return <PositivMessage />;
+      } else {
+        return <NegativMessage />;
+      }
     } else {
-      return <NegativMessage />;
+      return null;
     }
+  };
+
+  handleFormSubmit = e => {
+    e.preventDefault();
+    if (!this.state.isFormSubmitted)
+      this.setState({
+        isFormSubmitted: true
+      });
   };
 
   render() {
     return (
       <>
         <h1>Kup bilet na horror roku!</h1>
-        <input
-          type="checkbox"
-          id="age"
-          onChange={this.handleCheckboxCheck}
-          checked={this.state.isConfirmed}
-        />
-        <label htmlFor="age">Mam co najmniej 16lat</label>
+        <form onSubmit={this.handleFormSubmit}>
+          <input
+            type="checkbox"
+            id="age"
+            onChange={this.handleCheckboxCheck}
+            checked={this.state.isConfirmed}
+          />
+          <label htmlFor="age">Mam co najmniej 16lat</label>
+          <br />
+          <button>Kup bilet</button>
+        </form>
         {this.displayMessage()}
       </>
     );
   }
 }
 
-ReactDOM.render(<CheckboxAgeConfirmation />, document.getElementById("root"));
+ReactDOM.render(<TicketShop />, document.getElementById("root"));
