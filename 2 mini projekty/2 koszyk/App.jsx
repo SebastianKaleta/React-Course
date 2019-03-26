@@ -15,26 +15,33 @@ class App extends React.Component {
     });
   };
 
+  handleBuy = () => {
+    this.setState({
+      availableProducts: this.state.availableProducts - this.state.shoppingCart,
+      shoppingCart: 0
+    });
+  };
+
   render() {
+    const { shoppingCart, availableProducts } = this.state;
+    const style = shoppingCart === 0 ? { opacity: 0.3 } : {};
+
     return (
       <div>
         <button
-          disabled={this.state.shoppingCart ? false : true}
+          disabled={shoppingCart ? false : true}
           onClick={this.handleRemoveFromCart}
         >
           -
         </button>
-        <span> {this.state.shoppingCart} </span>
+        <span style={style}> {shoppingCart} </span>
         <button
-          disabled={
-            this.state.shoppingCart === this.state.availableProducts
-              ? true
-              : false
-          }
+          disabled={shoppingCart === availableProducts ? true : false}
           onClick={this.handleAddToCart}
         >
           +
         </button>
+        {shoppingCart > 0 && <button onClick={this.handleBuy}>Kup</button>}
       </div>
     );
   }
