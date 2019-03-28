@@ -45,14 +45,27 @@ const Item = ({ user }) => (
 );
 
 class ListItems extends React.Component {
-  // state = {
-  //   items: ["jabłko", "śliwka", "gruszka"]
-  // };
-  render() {
+  state = {
+    select: "all"
+  };
+
+  handleUsersFilter = () => {};
+
+  userList = () => {
     let users = this.props.data.users;
-    users = users.filter(user => user.sex === "female");
-    const Items = users.map(user => <Item key={user.id} user={user} />);
-    return <ul>{Items}</ul>;
+    users = users.map(user => <Item user={user} key={user.id} />);
+    return users;
+  };
+  render() {
+    <div>
+      <button onChange={this.handleUsersFilter.bind(this, "all")}>
+        Wszyscy
+      </button>
+      <button>Kobiety</button>
+      <button>Mężczyźni</button>
+      {this.userList()}
+    </div>;
+    return <div>{Item}</div>;
   }
 }
 
