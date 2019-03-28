@@ -1,4 +1,4 @@
-const ListItem = props => {
+const ListItems = props => {
   return (
     <ul>
       <li>1</li>
