@@ -10,7 +10,17 @@ class App extends React.Component {
     ]
   };
 
-  handleChangeStatus = id => {};
+  handleChangeStatus = id => {
+    const items = this.state.items.map(item => {
+      if (id === item.id) {
+        item.active = !item.active;
+      }
+      return item;
+    });
+    this.setState({
+      items: items
+    });
+  };
   render() {
     return (
       <React.Fragment>
