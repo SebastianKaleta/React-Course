@@ -1,6 +1,8 @@
 const Item = props => {
-  debugger;
-  <li style={props.active ? { fontWeight: "bold" } : { color: "gray" }}>
+  <li
+    style={props.active ? { fontWeight: "bold" } : { color: "gray" }}
+    onClick={props.changeStatus}
+  >
     {props.name}
   </li>;
 };

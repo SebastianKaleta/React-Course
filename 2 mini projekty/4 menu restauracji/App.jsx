@@ -9,11 +9,16 @@ class App extends React.Component {
       { id: 6, name: "chleb", active: false }
     ]
   };
+
+  handleChangeStatus = id => {};
   render() {
     return (
       <React.Fragment>
         <Header items={this.state.items} />
-        <ListItems items={this.state.items} />
+        <ListItems
+          items={this.state.items}
+          changeStatus={this.handleChangeStatus}
+        />
       </React.Fragment>
     );
   }
