@@ -1,22 +1,3 @@
-// const Dollars = props => {
-//   return (
-//     <div>
-//       Wartość w dolarach:
-//       {props.cash <= 0 ? "" : (props.cash / props.ratio).toFixed(2)}
-//     </div>
-//   );
-// };
-
-// const Euros = props => {
-//   const value = (props.cash / props.ratio).toFixed(2); //to co wyżej na inny sposoób
-//   return (
-//     <div>
-//       Kwota w euro:
-//       {props.cash <= 0 ? "" : value}
-//     </div>
-//   );
-// };
-
 const Cash = props => {
   return (
     <div>
@@ -28,10 +9,16 @@ const Cash = props => {
 
 class ExchangeCounter extends React.Component {
   state = {
-    amount: "",
-    ratioDollar: 3.6,
-    ratioEuro: 4.2
+    amount: ""
+    // ratioDollar: 3.6,
+    // ratioEuro: 4.2
   };
+
+  currences = [
+    { id: 1, name: "dollar", ratio: 3.6, title: "Wartość w dolarach:" },
+    { id: 2, name: "euro", ratio: 4.2, title: "Wartość w euro:" },
+    { id: 3, name: "pound", ratio: 4.55, title: "Wartość w funtach:" }
+  ];
 
   handleChange = e => {
     this.setState({
@@ -40,7 +27,16 @@ class ExchangeCounter extends React.Component {
   };
 
   render() {
-    const { amount, ratioDollar, ratioEuro } = this.state; //destrukturyzacja
+    const { amount } = this.state; //destrukturyzacja
+
+    const calculators = this.currences.map(currency => (
+      <Cash
+        key={currency.id}
+        ratio={currency.ratio}
+        title={currency.title}
+        cash={amount}
+      />
+    ));
 
     return (
       <div className="app">
@@ -51,10 +47,7 @@ class ExchangeCounter extends React.Component {
             onChange={this.handleChange}
           />
         </label>
-        {/* <Dollars cash={amount} ratio={ratioDollar} />
-        <Euros cash={amount} ratio={ratioEuro} /> */}
-        <Cash cash={amount} ratio={ratioDollar} title="Wartość w dolarach:" />
-        <Cash cash={amount} ratio={ratioEuro} title="Wartość w euro:" />
+        {calculators}
       </div>
     );
   }
