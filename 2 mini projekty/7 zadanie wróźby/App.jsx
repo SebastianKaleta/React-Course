@@ -21,9 +21,12 @@ class Draw extends React.Component {
     if (this.state.value === "") return alert("wpisz coś!");
     const options = [...this.state.options];
     options.push(this.state.value);
+    //const options =this.state.options.concat(this.state.value)
     this.setState({
-      options
+      options,
+      value: ""
     });
+    alert(`Wróżba dodana. Aktualne wróżby: ${options}`);
   };
   render() {
     return (
