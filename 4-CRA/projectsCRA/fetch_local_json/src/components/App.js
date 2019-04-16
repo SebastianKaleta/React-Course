@@ -10,7 +10,7 @@ class App extends Component {
 
   componentDidMount() {
     // setTimeout(this.fetchData, 3000);
-    fetch("data/words.json")
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
       .then(response => response.json())
       .then(data => {
         this.setState({
