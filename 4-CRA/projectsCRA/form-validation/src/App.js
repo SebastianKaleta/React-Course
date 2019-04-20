@@ -4,7 +4,9 @@ import "./App.css";
 class App extends Component {
   state = {
     username: "",
-    email: ""
+    email: "",
+    pass: "",
+    accept: false
   };
 
   handleChange = e => {
@@ -12,16 +14,30 @@ class App extends Component {
     console.log(e.target.name);
 
     const name = e.target.name;
-    const value = e.target.value;
-    this.setState({
-      [name]: value
-    });
+    const type = e.target.type;
+
+    if (type === "text" || type === "password" || type === "email") {
+      const value = e.target.value;
+      this.setState({
+        [name]: value
+      });
+    } else if (type === "checkbox") {
+      const checked = e.target.checked;
+      this.setState({
+        [name]: checked
+      });
+    }
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log("działa");
   };
 
   render() {
     return (
       <div className="App">
-        <form>
+        <form onSubmit={this.handleSubmit} noValidate>
           <label htmlFor="user">
             Twoje imię:
             <input
@@ -34,7 +50,7 @@ class App extends Component {
           </label>
 
           <label htmlFor="email">
-            Twoje adres email:
+            Twoje email:
             <input
               type="email"
               id="email"
@@ -43,16 +59,29 @@ class App extends Component {
               onChange={this.handleChange}
             />
           </label>
-          {/* <label htmlFor="user">
-            Twoje imię:
+          <label htmlFor="password">
+            Twoje hasło:
             <input
-              type="text"
-              id="user"
-              name="username"
-              value={this.state.username}
+              type="password"
+              id="password"
+              name="pass"
+              value={this.state.pass}
               onChange={this.handleChange}
             />
-          </label> */}
+          </label>
+
+          <label htmlFor="accept">
+            <input
+              type="checkbox"
+              id="accept"
+              name="accept"
+              checked={this.state.accept}
+              onChange={this.handleChange}
+            />
+            Wyrażam wszelką zgodę
+          </label>
+
+          <button>Zapisz się</button>
         </form>
       </div>
     );

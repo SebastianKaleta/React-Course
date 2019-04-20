@@ -9,3 +9,14 @@ label {
 input {
   margin: 20px 0 0 20px;
 }
+
+input[type="checkbox"] {
+  margin: 0 10px 0;
+}
+
+button {
+  display: block;
+  max-width: 200px;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
