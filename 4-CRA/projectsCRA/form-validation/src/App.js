@@ -72,6 +72,9 @@ class App extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             />
+            {this.state.errors.email && (
+              <span>{this.messages.email_incorect}</span>
+            )}
           </label>
           <label htmlFor="password">
             Twoje hasło:
@@ -82,6 +85,9 @@ class App extends Component {
               value={this.state.pass}
               onChange={this.handleChange}
             />
+            {this.state.errors.pass && (
+              <span>{this.messages.password_incorect}</span>
+            )}
           </label>
 
           <label htmlFor="accept">
@@ -94,6 +100,9 @@ class App extends Component {
             />
             Wyrażam wszelką zgodę
           </label>
+          {this.state.errors.accept && (
+            <span>{this.messages.accept_incorect}</span>
+          )}
 
           <button>Zapisz się</button>
         </form>
