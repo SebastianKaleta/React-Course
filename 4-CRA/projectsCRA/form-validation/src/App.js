@@ -6,13 +6,25 @@ class App extends Component {
     username: "",
     email: "",
     pass: "",
-    accept: false
+    accept: false,
+
+    errors: {
+      username: true,
+      email: false,
+      pass: false,
+      accept: false
+    }
+  };
+
+  messages = {
+    username_incorect:
+      "Nazwa musi być dłuższa niż 10 znaków i nie może zawierać spacji",
+    email_incorect: "Niepoprawny email",
+    password_incorect: "Hasło musi mieć 8 znaków",
+    accept_incorect: "Nie wyrażona zgoda"
   };
 
   handleChange = e => {
-    console.log(e.target.type);
-    console.log(e.target.name);
-
     const name = e.target.name;
     const type = e.target.type;
 
@@ -31,7 +43,6 @@ class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("działa");
   };
 
   render() {
@@ -47,6 +58,9 @@ class App extends Component {
               value={this.state.username}
               onChange={this.handleChange}
             />
+            {this.state.errors.username && (
+              <span>{this.messages.username_incorect}</span>
+            )}
           </label>
 
           <label htmlFor="email">
