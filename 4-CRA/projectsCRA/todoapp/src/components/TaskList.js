@@ -4,6 +4,32 @@ import Task from "./Task";
 const TaskList = props => {
   const active = props.tasks.filter(task => task.active);
   const done = props.tasks.filter(task => !task.active);
+
+  // done.sort((a, b) => {
+  //   return b.finishDate - a.finishDate;
+  // });
+  if (done.length >= 2) {
+    done.sort((a, b) => {
+      if (a.finishDate < b.finishDate) {
+        return 1;
+      }
+      if (a.finishDate > b.finishDate) {
+        return -1;
+      }
+
+      return 0;
+    });
+  }
+  if (active.length >= 2) {
+    active.sort((a, b) => {
+      a = a.text.toLowerCase(); //robimy tak, ponieważ zadania od wielkiej litery byłyby pierwsze, a nie po alfabecie
+      b = b.text.toLowerCase();
+      if (a < b) return -1;
+      if (a > b) return 1;
+      return 0;
+    });
+  }
+
   const activeTasks = active.map(task => (
     <Task
       key={task.id}
