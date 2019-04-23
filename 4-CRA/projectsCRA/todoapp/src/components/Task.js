@@ -1,9 +1,14 @@
 import React from "react";
 
-const Task = () => {
+const Task = props => {
+  const { text, date } = props.task;
   return (
     <div>
-      <h3>lista tasków</h3>
+      <p>
+        <strong> {text}</strong>- do <span>{date} </span>
+        <button onClick={props.change}>Zostało zrobione</button>
+        <button onClick={props.delete}>X</button>
+      </p>
     </div>
   );
 };
